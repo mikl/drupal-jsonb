@@ -18,6 +18,7 @@ use Drupal\Core\Field\FieldItemListInterface;
  *   label = @Translation("Default"),
  *   field_types = {
  *     "jsonb",
+ *     "json",
  *   }
  * )
  */
