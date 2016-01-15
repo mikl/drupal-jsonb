@@ -1,2 +1,7 @@
 <?php
-
+/**
+ * @file JSONB module.
+ *
+ * Provides a JSON(B) field type to be used for storing JSON in modern
+ * databases like PostgreSQL.
+ */
