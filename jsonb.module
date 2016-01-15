@@ -1,6 +1,7 @@
 <?php
 /**
- * @file JSONB module.
+ * @file
+ * JSONB module for Drupal 7.
  *
  * Provides a JSON(B) field type to be used for storing JSON in modern
  * databases like PostgreSQL.
