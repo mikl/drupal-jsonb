@@ -10,7 +10,7 @@ function jsonb_requirements($phase) {
     $type = Database::getConnection()->databaseType();
     $version = explode('.', Database::getConnection()->version());
 
-    // ensure we are running on a PostgreSQL database and we have the right version installed.
+    // Ensure we are running on a PostgreSQL database and we have the right version installed.
     if ($type != 'pgsql') {
       $requirements['jsonb'] = array(
         'title' => t('JSON/JSONB Field'),
@@ -18,7 +18,8 @@ function jsonb_requirements($phase) {
         'severity' => REQUIREMENT_ERROR,
         'description' => t('Only PostgreSQL is supported currently. You are running @type.', array('@type' => $type)),
       );
-    } else {
+    }
+    else {
       if ($version[0] < 9 || ($version[0] == 9 && $version[1] < 2)) {
         $requirements['jsonb'] = array(
           'title' => t('JSON/JSONB Field'),
