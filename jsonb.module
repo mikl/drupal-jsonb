@@ -7,6 +7,9 @@
  * databases like PostgreSQL.
  */
 
+define('JSONB_UI_EDIT_ALLOWED', 'allow');
+define('JSONB_UI_EDIT_HIDE', 'hide');
+
 /**
  * Implements hook_field_info().
  */
@@ -114,6 +117,29 @@ function jsonb_field_widget_info() {
 }
 
 /**
+ * Implements hook_field_widget_settings_form().
+ */
+function jsonb_field_widget_settings_form($field, $instance) {
+  $widget = $instance['widget'];
+  $settings = $widget['settings'];
+
+  if ($widget['type'] == 'jsonb_textarea') {
+    $form['ui_edit'] = [
+      '#type' => 'radios',
+      '#title' => t('UI editor'),
+      '#description' => t('Whether to allow the editor user interface to edit JSON data.'),
+      '#options' => [
+        JSONB_UI_EDIT_ALLOWED => t('Allow'),
+        JSONB_UI_EDIT_HIDE => t('Hide'),
+      ],
+      '#default_value' => (!empty($settings['ui_edit'])) ? $settings['ui_edit'] : JSONB_UI_EDIT_ALLOWED,
+    ];
+  }
+
+  return $form;
+}
+
+/**
  * Implements hook_field_widget_form().
  */
 function jsonb_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
@@ -129,6 +155,7 @@ function jsonb_field_widget_form(&$form, &$form_state, $field, $instance, $langc
       '#attached' => [
         'css' => [drupal_get_path('module', 'jsonb') . '/css/jsonb.admin.css'],
       ],
+      '#access' => $instance['widget']['settings']['ui_edit'] != JSONB_UI_EDIT_HIDE,
     ];
   }
 
