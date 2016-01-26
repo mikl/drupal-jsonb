@@ -20,8 +20,7 @@ function jsonb_field_schema($field) {
     'columns' => [
       'value' => [
         'type' => 'text',
-        // For MySQL only. PostgreSQL only uses sizes on ints and varchars.
-        'size' => 'big',
+        'mysql_type' => 'json',
         // Will be json or jsonb depending on the field type.
         'pgsql_type' => $field['type'],
         'not null' => FALSE,
